@@ -19,15 +19,15 @@ body <- dashboardBody(
       fluidRow(
         
         # CONTROLS
-        box(
+        box( width = 12,
           
-          title = "Controls",
+          title = "Query Interface",
           
           # Choose a column
           textAreaInput(
             "sql_code",
             "Wriet your SQLite3 query:",
-            cols = 8
+            cols = 12
           ),
           tableOutput("sql_result"),
 
@@ -39,9 +39,13 @@ body <- dashboardBody(
           
         ),
         # PLOT
-        box(
+        box( width = 12,
+             title = "Available tables",
+             footer = "Use PRAGMA table_info(authors); to see schema for a given table",
+             collapsible = T,
+             collapsed = T,
           
-          plotOutput("histPlot")
+          tableOutput("all_tables")
           
         )
       )
@@ -51,7 +55,7 @@ body <- dashboardBody(
     # Second tab content
     ########################
     tabItem(
-      tabName = "widgets",
+      tabName = "plots",
       h2("Widgets tab content")
     )
   )

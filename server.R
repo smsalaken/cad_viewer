@@ -10,7 +10,7 @@ source('functions.R', local = T)
 
 server <- function(input, output, session) {
   
-  histPlot_df <- eventReactive(
+  queryDT <- eventReactive(
     input$submit,
     {
       result <- runsql(input$sql_code)
@@ -21,7 +21,11 @@ server <- function(input, output, session) {
   )
   
   output$sql_result <- renderTable({
-    histPlot_df()
+    queryDT()
   })
   
-}
+  output$all_tables <- renderTable({
+    runsql("SELECT name FROM sqlite_master WHERE type='table'")
+  })
+  
+} # end of server
