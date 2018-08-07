@@ -6,4 +6,4 @@
 library(shinydashboard)
 
 
-header <- dashboardHeader(title = "Super Cool Header")
+header <- dashboardHeader(title = "CAD interface")

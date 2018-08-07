@@ -29,13 +29,14 @@ body <- dashboardBody(
             "Wriet your SQLite3 query:",
             cols = 12
           ),
-          tableOutput("sql_result"),
-
           # Create an eventReactive element
           actionButton(
             inputId = "submit",
             label = "Run Query"
-          )
+          ),
+          tableOutput("sql_result")
+
+          
           
         ),
         # PLOT
