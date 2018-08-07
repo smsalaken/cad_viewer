@@ -5,19 +5,23 @@
 ###################
 library(shinydashboard)
 
+source('functions.R', local = T)
+
 
 server <- function(input, output, session) {
   
   histPlot_df <- eventReactive(
     input$submit,
     {
-      df[[ input$columnChoice ]]
+      result <- runsql(input$sql_code)
+      print(result)
+      result
+      
     }
   )
   
-  output$histPlot <- renderPlot({
-    data <- histPlot_df()[ seq_len(input$slider) ]
-    hist(data)
+  output$sql_result <- renderTable({
+    histPlot_df()
   })
   
 }

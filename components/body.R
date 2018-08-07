@@ -15,7 +15,7 @@ body <- dashboardBody(
     # First tab content
     ########################
     tabItem(
-      tabName = "dashboard",
+      tabName = "sql_query",
       fluidRow(
         
         # CONTROLS
@@ -24,19 +24,17 @@ body <- dashboardBody(
           title = "Controls",
           
           # Choose a column
-          selectInput(
-            "columnChoice",
-            "Choose a column:",
-            choices = colnames(df),
-            selected = "n"
+          textAreaInput(
+            "sql_code",
+            "Wriet your SQLite3 query:",
+            cols = 8
           ),
-          
-          sliderInput("slider", "Number of observations:", 1, 100, 50),
-          
+          tableOutput("sql_result"),
+
           # Create an eventReactive element
           actionButton(
             inputId = "submit",
-            label = "Submit column"
+            label = "Run Query"
           )
           
         ),
