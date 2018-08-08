@@ -6,6 +6,8 @@
 # components as well.
 ###################
 library(shinydashboard)
+source('functions.R', local = T)
+
 
 
 body <- dashboardBody(
@@ -57,7 +59,16 @@ body <- dashboardBody(
     ########################
     tabItem(
       tabName = "plots",
-      h2("Widgets tab content")
+      h2("Plotting interface"),
+      
+      fluidRow(
+        box(width = 12,
+            selectInput("tableChooser", "Select a table", choices = runsql("SELECT name FROM sqlite_master WHERE type='table'"))
+            ),
+        box(width = 12,
+            rpivotTable::rpivotTableOutput("pivotPlots")
+        )
+      )
     )
   )
 )

@@ -28,4 +28,18 @@ server <- function(input, output, session) {
     runsql("SELECT name FROM sqlite_master WHERE type='table'")
   })
   
+  
+  queryDT_plot <- eventReactive(
+    input$tableChooser,
+    {
+      result <- runsql(paste0("SELECT * FROM ",input$tableChooser))
+      print(head(result))
+      result
+      
+    }
+  )
+  output$pivotPlots <- rpivotTable::renderRpivotTable({
+    rpivotTable::rpivotTable(queryDT_plot())
+  })
+  
 } # end of server
