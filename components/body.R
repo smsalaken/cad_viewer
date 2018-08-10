@@ -29,7 +29,8 @@ body <- dashboardBody(
           textAreaInput(
             "sql_code",
             "Wriet your SQLite3 query:",
-            cols = 12
+            cols = 12,
+            height = '300px'
           ),
           # Create an eventReactive element
           actionButton(
@@ -63,7 +64,18 @@ body <- dashboardBody(
       
       fluidRow(
         box(width = 12,
-            selectInput("tableChooser", "Select a table", choices = runsql("SELECT name FROM sqlite_master WHERE type='table'"))
+            #selectInput("tableChooser", "Select a table", choices = runsql("SELECT name FROM sqlite_master WHERE type='table'"))
+            textAreaInput(
+              "sql_code_plot",
+              "Wriet your SQLite3 query:",
+              cols = 12,
+              height = '300px'
+            ),
+            # Create an eventReactive element
+            actionButton(
+              inputId = "submit_plot_q",
+              label = "Run Query"
+            )
             ),
         box(width = 12,
             rpivotTable::rpivotTableOutput("pivotPlots")

@@ -30,9 +30,11 @@ server <- function(input, output, session) {
   
   
   queryDT_plot <- eventReactive(
-    input$tableChooser,
+    #input$tableChooser,
+    input$submit_plot_q,
     {
-      result <- runsql(paste0("SELECT * FROM ",input$tableChooser))
+      #result <- runsql(paste0("SELECT * FROM ",input$tableChooser))
+      result <- runsql(input$sql_code_plot)
       print(head(result))
       result
       
